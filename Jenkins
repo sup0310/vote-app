@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('BUILD IMAGE'){
             steps{
-                cnvDockerBuild(dockerFile: "src/main/vote/Dockerfile.jvm", imageName: "cnv-vote", imageTag: "build-${GIT_HASH}")              
+                cnvDockerBuild(dockerFile: "src/main/vote/Dockerfile.jvm", registryUrl: "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 515966503784.dkr.ecr.ap-south-1.amazonaws.com", imageName: "cnv-515966503784.dkr.ecr.ap-south-1.amazonaws.com/test-repo:v1")
             }
             
         }
