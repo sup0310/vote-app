@@ -1,0 +1,24 @@
+pipeline{
+    agent {label 'worker'}
+    options{
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+        retry(3)
+        timeout(time: 10, unit: 'MINUTES')
+    }
+    triggers {
+        cron('H */4 * * 1-5')
+    }
+    stages{
+        stage('CI'){
+            steps{
+                sh "echo hello CI job"
+            }
+        }
+        stage('CD'){
+            steps{
+                sh "echo hello CD job"
+            }
+        }
+    }
+}
