@@ -8,12 +8,9 @@ pipeline{
     }
     triggers { cron('H */4 * * 1-5') }
     stages{
-        stage('CI'){
+        stage('BUILD IMAGE'){
             steps{
-                sh "echo hello CI JOB"
-                cd vote
-                docker build -t sup0310/vote:v1 .
-                
+                cnvDockerBuild(dockerFile: "src/main/vote/Dockerfile.jvm", imageName: "cnv-vote", imageTag: "build-${GIT_HASH}")              
             }
             
         }
